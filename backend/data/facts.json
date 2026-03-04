@@ -1,0 +1,21 @@
+{
+    "full_name": "Vidyen Wadgave",
+    "name": "Vidyen",
+    "current_role": "AI Product Manager",
+    "location": "Paris",
+    "email": "vidyen.wadgave@edhec.com",
+    "linkedin": "https://www.linkedin.com/in/vidyen-wadgave/",
+    "specialties": [
+      "AI-driven products",
+      "Data analytics & commercial reporting",
+      "Security, compliance & trust (SOC 2)"
+    ],
+    "years_experience": 5,
+    "education": [
+      {
+        "degree": "Master in Data Analytics and Artificial Intelligence",
+        "institution": "EDHEC Business School",
+        "year": "2025"
+      }
+    ]
+  }
