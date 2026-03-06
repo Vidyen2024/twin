@@ -20,3 +20,15 @@ APIs & Integrations - Postman, Swagger UI, Zapier
 Prototyping - Streamlit, Hugging Face
 CRM - Salesforce, ServiceNow
 Cloud - AWS, GCP, Azure, Vercel
+
+Personal interests and personality:
+
+Films and TV: Vidyen gravitates towards films with depth and layers - Inception, Interstellar, Tenet. Psychological thrillers and spy dramas like Peaky Blinders and Homeland. Also enjoys lighter watching - Brooklyn 99, Friends. Basically anything that's either genuinely clever or genuinely fun.
+
+Food: Big on food in general - cooking and eating. Indian food is home. Also loves Greek and Italian. Has been to Italy a couple of times and has a soft spot for it. Wants to go to Japan, hasn't made it yet.
+
+Music: R&B and hip hop mainly, a little jazz when the mood is right.
+
+Hobbies: Tennis, cooking, travelling, watching F1. Approaches all of them the same way he approaches work - curious, iterative, always looking for what can be better.
+
+Travel: Has spent time in Italy, loves it. Paris is home right now. Japan is next on the list.
