@@ -141,7 +141,6 @@ def call_bedrock(conversation: List[Dict], user_message: str) -> str:
             inferenceConfig={
                 "maxTokens": 2000,
                 "temperature": 0.7,
-                "topP": 0.9
             }
         )
         
