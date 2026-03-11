@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, ArrowRight, Sun, Moon } from 'lucide-react';
+import { Send, ArrowRight } from 'lucide-react';
 
 interface Message {
     id: string;
@@ -16,13 +16,12 @@ const SUGGESTED_QUESTIONS = [
     "What are you working on right now?",
 ];
 
-export default function Twin() {
+export default function Twin({ dark }: { dark: boolean }) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [sessionId, setSessionId] = useState<string>('');
     const [mounted, setMounted] = useState(false);
-    const [dark, setDark] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -184,7 +183,7 @@ export default function Twin() {
                 }
 
                 .tw-header {
-                    padding: 18px 22px 16px;
+                    padding: 14px 22px 12px;
                     display: flex;
                     align-items: center;
                     gap: 13px;
@@ -245,21 +244,6 @@ export default function Twin() {
                     50% { opacity: 0.4; }
                 }
 
-                .tw-toggle {
-                    width: 32px; height: 32px;
-                    border-radius: 50%;
-                    border: 1px solid;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    flex-shrink: 0;
-                    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-                    padding: 0;
-                }
-
-                .tw-toggle:hover { transform: scale(1.08); }
-                .tw-toggle:active { transform: scale(0.94); }
 
                 .tw-messages {
                     flex: 1;
@@ -348,8 +332,8 @@ export default function Twin() {
                 .tw-row.user { justify-content: flex-end; }
 
                 @keyframes tw-in {
-                    from { opacity: 0; transform: translateY(8px); }
-                    to   { opacity: 1; transform: translateY(0); }
+                    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+                    to   { opacity: 1; transform: translateY(0) scale(1); }
                 }
 
                 .tw-msg-avatar {
@@ -453,6 +437,13 @@ export default function Twin() {
                     letter-spacing: 0;
                     transition: color 0.3s ease;
                 }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .tw-welcome { transition: none; }
+                    .tw-row { animation: none; opacity: 1; }
+                    .tw-dot { animation: none; opacity: 0.55; }
+                    .tw-online-dot { animation: none; }
+                }
             `}</style>
 
             <div className="tw" style={{
@@ -468,25 +459,13 @@ export default function Twin() {
                     <img src="/avatar.png" alt="Vidyen" className="tw-avatar" />
                     <div className="tw-header-info">
                         <p className="tw-header-name" style={{ color: t.nameColor }}>Vidyen Wadgave</p>
-                        <p className="tw-header-title" style={{ color: t.titleColor }}>AI Product Manager</p>
+                        <p className="tw-header-title" style={{ color: t.titleColor }}>Ask me anything</p>
                     </div>
                     <div className="tw-header-right">
                         <div className="tw-online">
                             <span className="tw-online-dot" />
                             Online
                         </div>
-                        <button
-                            className="tw-toggle"
-                            onClick={() => setDark(d => !d)}
-                            style={{
-                                background: t.toggleBg,
-                                borderColor: t.toggleBorder,
-                                color: t.toggleColor,
-                            }}
-                            aria-label="Toggle dark mode"
-                        >
-                            {dark ? <Sun size={14} /> : <Moon size={14} />}
-                        </button>
                     </div>
                 </div>
 
