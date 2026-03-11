@@ -23,6 +23,7 @@ export default function Twin({ dark }: { dark: boolean }) {
     const [sessionId, setSessionId] = useState<string>('');
     const [mounted, setMounted] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -30,7 +31,10 @@ export default function Twin({ dark }: { dark: boolean }) {
     }, []);
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        const container = messagesContainerRef.current;
+        if (container) {
+            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        }
     }, [messages]);
 
     const sendMessage = async (text?: string) => {
@@ -470,7 +474,7 @@ export default function Twin({ dark }: { dark: boolean }) {
                 </div>
 
                 {/* Messages */}
-                <div className="tw-messages" style={{ background: t.msgBg }}>
+                <div ref={messagesContainerRef} className="tw-messages" style={{ background: t.msgBg }}>
                     {messages.length === 0 && (
                         <div className={`tw-welcome ${mounted ? 'in' : ''}`}>
                             <img src="/avatar.png" alt="Vidyen" className="tw-welcome-avatar" />

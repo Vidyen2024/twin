@@ -29,7 +29,7 @@ export default function PageClient() {
 
                 /* ── Page root ───────────────────────────────── */
                 .page-root {
-                    min-height: 100vh;
+                    height: 100vh;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -60,7 +60,11 @@ export default function PageClient() {
                 .page-frame {
                     width: 100%;
                     max-width: 1100px;
+                    max-height: calc(100vh - 40px);
+                    display: flex;
+                    flex-direction: column;
                     border-radius: 24px;
+                    overflow: hidden;
                     transition: border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease;
                 }
                 .page-frame.light {
@@ -92,6 +96,9 @@ export default function PageClient() {
                     width: 100%;
                     padding: 28px 36px 0;
                     align-items: stretch;
+                    flex: 1;
+                    min-height: 0;
+                    overflow: hidden;
                 }
 
                 /* ── Chat wrapper ────────────────────────────── */
@@ -99,6 +106,8 @@ export default function PageClient() {
                     opacity: 0;
                     animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.16s both;
                     height: 100%;
+                    min-height: 0;
+                    overflow: hidden;
                 }
 
                 /* ── Footer ──────────────────────────────────── */
@@ -161,10 +170,11 @@ export default function PageClient() {
 
                 /* ── Responsive ──────────────────────────────── */
                 @media (max-width: 860px) {
-                    .page-root  { padding: 20px 16px; }
-                    .page-grid  { grid-template-columns: 1fr; gap: 20px; padding: 20px 20px 0; }
+                    .page-root  { padding: 20px 16px; height: auto; min-height: 100vh; overflow: auto; }
+                    .page-frame { max-height: none; overflow: visible; }
+                    .page-grid  { grid-template-columns: 1fr; gap: 20px; padding: 20px 20px 0; flex: none; overflow: visible; }
                     .page-footer { padding: 12px 20px 20px; }
-                    .chat-wrapper { height: min(480px, 70vh); }
+                    .chat-wrapper { height: min(480px, 70vh); overflow: hidden; }
                 }
 
                 /* ── Reduced motion ───────────────────────────── */
