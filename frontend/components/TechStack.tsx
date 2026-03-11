@@ -44,7 +44,7 @@ export default function TechStack() {
                     display: flex;
                     align-items: center;
                     gap: 10px;
-                    margin-bottom: 14px;
+                    margin-bottom: 8px;
                 }
                 .ts-divider-line {
                     flex: 1;

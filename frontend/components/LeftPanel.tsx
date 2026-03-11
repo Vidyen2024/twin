@@ -34,7 +34,7 @@ export default function LeftPanel() {
                 }
 
                 /* ── Name block ───────────────────────────────── */
-                .name-block { margin-bottom: 16px; }
+                .name-block { margin-bottom: 10px; }
 
                 .name-photo-row {
                     display: flex;
@@ -58,8 +58,8 @@ export default function LeftPanel() {
                 }
 
                 .intro-photo {
-                    width: 120px;
-                    height: 148px;
+                    width: 100px;
+                    height: 124px;
                     border-radius: 14px;
                     object-fit: cover;
                     object-position: center center;
@@ -139,7 +139,7 @@ export default function LeftPanel() {
                         0 8px 20px rgba(0,0,0,0.13),
                         0 20px 44px rgba(0,0,0,0.09);
                     font-family: 'SF Mono', Menlo, Monaco, 'Fira Code', 'Cascadia Code', monospace;
-                    margin-bottom: 10px;
+                    margin-bottom: 6px;
                 }
 
                 .terminal-bar {
@@ -166,10 +166,10 @@ export default function LeftPanel() {
 
                 .terminal-body {
                     background: #1c1c1e;
-                    padding: 18px 20px 22px;
+                    padding: 12px 18px 14px;
                 }
 
-                .cli-pair { margin-bottom: 11px; }
+                .cli-pair { margin-bottom: 7px; }
                 .cli-pair:last-child { margin-bottom: 0; }
 
                 .cli-prompt-row {
@@ -303,8 +303,8 @@ export default function LeftPanel() {
                             <Image
                                 src="/vidyen-cropped.jpeg"
                                 alt="Vidyen Wadgave"
-                                width={120}
-                                height={148}
+                                width={100}
+                                height={124}
                                 className="intro-photo"
                                 priority
                             />
@@ -381,7 +381,7 @@ export default function LeftPanel() {
                 {/* Links */}
                 <motion.div
                     className="links-row"
-                    style={{ marginBottom: '14px' }}
+                    style={{ marginBottom: '8px' }}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ ...spring, delay: 0.30 }}

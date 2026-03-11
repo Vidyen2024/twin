@@ -94,7 +94,7 @@ export default function PageClient() {
                     grid-template-columns: 1fr 1fr;
                     gap: 48px;
                     width: 100%;
-                    padding: 28px 36px 0;
+                    padding: 24px 36px 16px;
                     align-items: stretch;
                     flex: 1;
                     min-height: 0;
