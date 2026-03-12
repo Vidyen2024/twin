@@ -1,6 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 import os
 from dotenv import load_dotenv
 from typing import Optional, List, Dict
@@ -14,7 +18,21 @@ from context import prompt
 # Load environment variables
 load_dotenv()
 
+# ── Rate limiting ──────────────────────────────────────────────────────────
+limiter = Limiter(key_func=get_remote_address)
+
 app = FastAPI()
+app.state.limiter = limiter
+
+
+async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    return JSONResponse(
+        status_code=429,
+        content={"detail": "You're sending messages too quickly. Please wait a few seconds and try again."},
+    )
+
+
+app.add_exception_handler(RateLimitExceeded, rate_limit_handler)
 
 # Configure CORS
 origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -52,8 +70,8 @@ if USE_S3:
 
 # Request/Response models
 class ChatRequest(BaseModel):
-    message: str
-    session_id: Optional[str] = None
+    message: str = Field(..., min_length=1, max_length=1000)
+    session_id: Optional[str] = Field(None, pattern=r'^[a-f0-9-]{36}$')
 
 
 class ChatResponse(BaseModel):
@@ -181,20 +199,21 @@ async def health_check():
 
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+@limiter.limit("15/minute")
+async def chat(request: Request, body: ChatRequest):
     try:
         # Generate session ID if not provided
-        session_id = request.session_id or str(uuid.uuid4())
+        session_id = body.session_id or str(uuid.uuid4())
 
         # Load conversation history
         conversation = load_conversation(session_id)
 
         # Call Bedrock for response
-        assistant_response = call_bedrock(conversation, request.message)
+        assistant_response = call_bedrock(conversation, body.message)
 
         # Update conversation history
         conversation.append(
-            {"role": "user", "content": request.message, "timestamp": datetime.now().isoformat()}
+            {"role": "user", "content": body.message, "timestamp": datetime.now().isoformat()}
         )
         conversation.append(
             {

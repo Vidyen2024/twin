@@ -62,6 +62,16 @@ export default function Twin({ dark }: { dark: boolean }) {
                 }),
             });
 
+            if (response.status === 429) {
+                setMessages(prev => [...prev, {
+                    id: (Date.now() + 1).toString(),
+                    role: 'assistant',
+                    content: "You're sending messages too quickly — please wait a few seconds and try again.",
+                    timestamp: new Date(),
+                }]);
+                return;
+            }
+
             if (!response.ok) throw new Error('Failed to send message');
             const data = await response.json();
             if (!sessionId) setSessionId(data.session_id);
